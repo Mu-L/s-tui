@@ -121,18 +121,18 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
     def set_y_label(self, y_label):
         if not y_label:
             text = urwid.Text("1")
-            pile = urwid.Pile([urwid.ListBox([text])])
+            pile = urwid.Pile([urwid.ListBox([text])])  # pyright: ignore[reportArgumentType]
             self.y_label = ("fixed", 1, pile)  # type: ignore[assignment]
             return
 
         str_y_label = [str(i) for i in y_label]
         y_label_nums = str_y_label[1:]
-        y_list_walker = [(1, urwid.ListBox([urwid.Text(str_y_label[0])]))]
+        y_list_walker = [(1, urwid.ListBox([urwid.Text(str_y_label[0])]))]  # pyright: ignore[reportArgumentType]
 
         for num in y_label_nums:
-            y_list_walker = [urwid.ListBox([urwid.Text(num)]), *y_list_walker]
+            y_list_walker = [urwid.ListBox([urwid.Text(num)]), *y_list_walker]  # pyright: ignore[reportArgumentType]
 
-        y_list_walker = urwid.Pile(y_list_walker, focus_item=0)
+        y_list_walker = urwid.Pile(y_list_walker, focus_item=0)  # pyright: ignore[reportArgumentType]
         y_scale_len = len(max(str_y_label, key=len))
 
         self.y_label = ("fixed", y_scale_len, y_list_walker)  # type: ignore[assignment]
@@ -151,7 +151,7 @@ class LabeledBarGraphVector(urwid.WidgetPlaceholder):
         ):
             if state:
                 text_w = urwid.Text(sub_title, align="center")
-                sub_title_widget = urwid.ListBox([text_w])
+                sub_title_widget = urwid.ListBox([text_w])  # pyright: ignore[reportArgumentType]
 
                 # Use placeholder if sensor is unavailable
                 if idx < len(self.sensor_available) and not self.sensor_available[idx]:
