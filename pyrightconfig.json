@@ -1,4 +1,6 @@
 {
     "include": ["s_tui"],
-    "exclude": ["build", "dist", "**/__pycache__"]
+    "exclude": ["build", "dist", "**/__pycache__"],
+    // urwid 4.0.8 MRO change makes SimpleFocusListWalker look abstract (urwid#1203)
+    "reportAbstractUsage": "none"
 }
