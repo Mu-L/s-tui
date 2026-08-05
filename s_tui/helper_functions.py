@@ -55,6 +55,13 @@ def get_processor_name() -> str:
             for line in cpuinfo:
                 if "model name" in line:
                     return re.sub(r".*model name.*:", "", line, count=1)
+        # Many ARM SBCs (Raspberry Pi, Orange Pi, Le Potato, ...) have no
+        # "model name" in /proc/cpuinfo, but do expose a useful board name
+        # in the device tree.
+        model = cat("/proc/device-tree/model", fallback=b"", binary=True)
+        name = model.split(b"\x00", 1)[0].decode(errors="replace").strip()
+        if name:
+            return name
     elif platform.system() == "FreeBSD":
         return subprocess.check_output(["sysctl", "-n", "hw.model"], text=True).strip()
     elif platform.system() == "Darwin":
