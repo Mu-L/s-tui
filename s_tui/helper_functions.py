@@ -37,7 +37,7 @@ if TYPE_CHECKING:
 
 from collections import OrderedDict
 
-__version__ = "1.4.0"
+__version__ = "1.5.0"
 
 _DEFAULT = object()
 POSIX = os.name == "posix"
